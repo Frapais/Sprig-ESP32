@@ -1,8 +1,8 @@
 # Sprig ESP32 Development Board 
 This is the repository of my **Sprig-C3** project, which includes an ESP32 development board I made to simplify the creation of small battery-powered devices for use with Home Assistant and ESPHome.
-| <img src="PCB/image8.png" alt="Photo 1" width="600"/> | <img src="PCB/image3.png" alt="Photo 2" width="600"/> |
+| <img src="PCB/052.jpg" alt="Photo 1" width="600"/> | <img src="PCB/053.jpg" alt="Photo 2" width="600"/> |
 |-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="PCB/Screenshot%20from%202024-04-12%2010-49-21.png" alt="Pinout" width="600"/> | <img src="PCB/Screenshot%20from%202024-04-12%2010-06-56.png" alt="Dimensions" width="600"/> |
+| <img src="PCB/Screenshot%20from%202024-04-12%2010-49-21.png" alt="Pinout" width="600"/> | <img src="PCB/048.jpg" alt="photo 3" width="600"/> |
 
 
 ## Description
@@ -16,7 +16,7 @@ This is the repository of my **Sprig-C3** project, which includes an ESP32 devel
 * Breadboard-compatible pin headers breaking out all the pins of ESP32-C3, as well as the USB, battery, and Vcc voltage.
 
 ### Tests
-| Idle Power Consumption: 66.1μA                                                                                                                          | Max Charging Current: 464mA                                                                                         | VCC Output @ 4.2V input: 3.356V                                                                                       | VCC Output @ 3V input: 3.359V                                                                                       |
+| Idle Power Consumption: 66.1μA                                                                                                                          | Max Charging Current: 464mA                                                                                         | VCC Output @ 4.2V input: 3.356V                                                                                       | VCC Output @ 3V input: ~3.359V                                                                                       |
 |-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | <img src="Tests/Idle%20consumption%20at%204.2V.jpg" alt="Idle Power Consumption" width="300"/> | <img src="Tests/Max%20charging%20current.jpg" width="300"/> | <img src="Tests/VCC%20voltage%20at%204.2V.jpg" width="300"/> | <img src="Tests/VCC%20voltage%20at%203V.jpg" width="300"/> |
 
