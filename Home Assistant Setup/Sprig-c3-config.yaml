@@ -1,0 +1,95 @@
+esphome:
+  name: canopy-test
+  friendly_name: Canopy test
+
+  libraries:
+    # Wire library is needed for the i2c protocol
+    - "Wire"
+  on_boot: 
+    then:
+      # If you want to implement deep_sleep, uncomment the following line
+      # - script.execute: deep_sleep_evaluation
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+    version: recommended
+
+# Enable logging
+logger:
+  # level: DEBUG
+  # baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "auto-generated-key"
+
+ota:
+  - platform: esphome
+    password: "auto-generated-password"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Canopy-Test Fallback Hotspot"
+    password: "auto-generated-password"
+
+captive_portal:
+
+# This is a "toggle" type input_boolean helper, created from the Home Assistant "settings" menu.
+# When this binary sensor is "on" the deep sleep will be disabled.
+# Be sure to enable deep sleep functionality AFTER you have configured the device on Home Assistant, otherwise this binary sensor state will not be read.
+binary_sensor:
+  - platform: homeassistant
+    id: disable_deep_sleep
+    entity_id: input_boolean.disable_deep_sleep
+
+# Example configuration entry for Sprig-C3 board
+i2c:
+- id: bus_a
+  sda: 2
+  scl: 3
+  scan: True
+
+sensor:
+# This is the MAX17043 fuel gauge sensor configuration
+  - platform: max17043
+    id: max17043_id
+    i2c_id: bus_a
+    battery_voltage:
+      name: "Battery Voltage"
+      accuracy_decimals: 1
+    battery_level:
+      name: "Battery"
+      accuracy_decimals: 0
+    update_interval: 1min
+
+
+
+# This script sets the waiting time before going into sleep mode
+# Once the delay time has passed, checks the status of the binary sensor mentioned above
+# If the binary sensor status is "on", it disables deep sleep. Otherwise, it enters deep sleep for the set duration
+script:
+  - id: deep_sleep_evaluation
+    mode: queued
+    then:
+      - delay: 60s
+      - if:
+          condition:
+            binary_sensor.is_on: disable_deep_sleep
+          then:
+            - logger.log: 'Deep Sleep Disabled'
+            - deep_sleep.prevent: deep_sleep_1
+          else:
+            - deep_sleep.enter: deep_sleep_1
+      - script.execute: deep_sleep_evaluation
+
+# Here, the deep sleep duration is declared
+deep_sleep:
+  id: deep_sleep_1
+  sleep_duration: 10min
