@@ -1,4 +1,4 @@
-# Sprig ESP32 Development Board 
+# Sprig-C3 ESP32 Development Board 
 This is the repository of my **Sprig-C3** project, which includes an ESP32 development board I made to simplify the creation of small battery-powered devices for use with Home Assistant and ESPHome.
 | <img src="PCB/052.jpg" alt="Photo 1" width="600"/> | <img src="PCB/053.jpg" alt="Photo 2" width="600"/> |
 |-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
